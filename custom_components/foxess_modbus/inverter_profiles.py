@@ -450,6 +450,14 @@ _INVERTER_PROFILES_LIST = [
         versions={None: Inv.H3_SMART},
         special_registers=H3_SMART_REGISTERS,
     ),
+
+    # Avocado Pro
+    InverterModelProfile(InverterModel.AV_PRO, r"^MQ2200-M-H").add_connection_type(
+        ConnectionType.AUX,
+        RegisterType.HOLDING,
+        versions={None: Inv.AV_PRO},
+        special_registers=AVOCADO_PRO_REGISTERS,
+    ),
 ]
 
 INVERTER_PROFILES = {x.model: x for x in _INVERTER_PROFILES_LIST}
