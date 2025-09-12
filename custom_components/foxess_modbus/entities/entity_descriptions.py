@@ -45,7 +45,7 @@ BMS_CONNECT_STATE_ADDRESS = [
     ModbusAddressSpec(input=11058, models=Inv.H1_G1 | Inv.KH_PRE119),
     ModbusAddressSpec(holding=31029, models=Inv.H1_G1 | Inv.H1_LAN),
     ModbusAddressSpec(holding=31028, models=Inv.KH_PRE133 | Inv.H1_G2_SET),
-    ModbusAddressSpec(holding=37002, models=Inv.KH_133),
+    ModbusAddressSpec(holding=37002, models=Inv.KH_133 | Inv.AV_PRO),
     ModbusAddressSpec(holding=31042, models=Inv.H3_SET),
 ]
 
@@ -65,7 +65,7 @@ def _version_entities() -> Iterable[EntityFactory]:
         address=[
             ModbusAddressSpec(input=10016, models=Inv.H1_G1 | Inv.KH_PRE119),
             ModbusAddressSpec(holding=30016, models=Inv.H1_G1 | Inv.H1_LAN | Inv.H3_SET),
-            ModbusAddressSpec(holding=36001, models=Inv.H3_PRO_PRE122),
+            ModbusAddressSpec(holding=36001, models=Inv.H3_PRO_PRE122 | Inv.AV_PRO),
         ],
         is_hex=False,
     )
@@ -90,7 +90,7 @@ def _version_entities() -> Iterable[EntityFactory]:
         address=[
             ModbusAddressSpec(input=10017, models=Inv.H1_G1 | Inv.KH_PRE119),
             ModbusAddressSpec(holding=30017, models=Inv.H1_G1 | Inv.H1_LAN | Inv.H3_SET),
-            ModbusAddressSpec(holding=36002, models=Inv.H3_PRO_PRE122),
+            ModbusAddressSpec(holding=36002, models=Inv.H3_PRO_PRE122 | Inv.AV_PRO),
         ],
         is_hex=False,
     )
@@ -114,7 +114,7 @@ def _version_entities() -> Iterable[EntityFactory]:
     yield _manager_version(
         address=[
             ModbusAddressSpec(input=10018, models=Inv.H1_G1 | Inv.KH_PRE119),
-            ModbusAddressSpec(holding=30018, models=Inv.H1_G1 | Inv.H1_LAN),
+            ModbusAddressSpec(holding=30018, models=Inv.H1_G1 | Inv.H1_LAN | Inv.AV_PRO),
         ],
         is_hex=False,
     )
@@ -189,7 +189,7 @@ def _pv_entities() -> Iterable[EntityFactory]:
         addresses=[
             ModbusAddressesSpec(input=[11000], models=Inv.H1_G1 | Inv.KH_PRE119),
             ModbusAddressesSpec(holding=[31000], models=Inv.H1_G1 | Inv.H1_LAN | Inv.KH_PRE133 | Inv.H3_SET),
-            ModbusAddressesSpec(holding=[39070], models=Inv.H1_G2_SET | Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39070], models=Inv.H1_G2_SET | Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART | Inv.AV_PRO),
         ],
         name="PV1 Voltage",
     )
@@ -205,7 +205,7 @@ def _pv_entities() -> Iterable[EntityFactory]:
     yield _pv_current(
         key="pv1_current",
         addresses=[
-            ModbusAddressesSpec(holding=[39071], models=Inv.H1_G2_SET | Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39071], models=Inv.H1_G2_SET | Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART | Inv.AV_PRO),
         ],
         name="PV1 Current",
         scale=0.01,
@@ -219,6 +219,7 @@ def _pv_entities() -> Iterable[EntityFactory]:
             # which means that negative values are represented incorrectly (as 0x0000FFFF etc)
             ModbusAddressesSpec(holding=[39280], models=Inv.H1_G2_SET),
             ModbusAddressesSpec(holding=[39280, 39279], models=Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39079], models=Inv.AV_PRO),
         ],
         name="PV1 Power",
     )
@@ -239,6 +240,7 @@ def _pv_entities() -> Iterable[EntityFactory]:
             ModbusAddressesSpec(input=[11003], models=Inv.H1_G1 | Inv.KH_PRE119),
             ModbusAddressesSpec(holding=[31003], models=Inv.H1_G1 | Inv.H1_LAN | Inv.KH_PRE133 | Inv.H3_SET),
             ModbusAddressesSpec(holding=[39072], models=Inv.H1_G2_SET | Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39075], models=Inv.AV_PRO),
         ],
         name="PV2 Voltage",
     )
@@ -254,7 +256,7 @@ def _pv_entities() -> Iterable[EntityFactory]:
     yield _pv_current(
         key="pv2_current",
         addresses=[
-            ModbusAddressesSpec(holding=[39073], models=Inv.H1_G2_SET | Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39073], models=Inv.H1_G2_SET | Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART | Inv.AV_PRO),
         ],
         name="PV2 Current",
         scale=0.01,
@@ -268,6 +270,7 @@ def _pv_entities() -> Iterable[EntityFactory]:
             # which means that negative values are represented incorrectly (as 0x0000FFFF etc)
             ModbusAddressesSpec(holding=[39282], models=Inv.H1_G2_SET),
             ModbusAddressesSpec(holding=[39282, 39281], models=Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39281], models=Inv.AV_PRO),
         ],
         name="PV2 Power",
     )
@@ -287,7 +290,7 @@ def _pv_entities() -> Iterable[EntityFactory]:
         addresses=[
             ModbusAddressesSpec(input=[11096], models=Inv.KH_PRE119),
             ModbusAddressesSpec(holding=[31039], models=Inv.KH_PRE133),
-            ModbusAddressesSpec(holding=[39074], models=Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39074], models=Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART | Inv.AV_PRO),
         ],
         name="PV3 Voltage",
     )
@@ -303,7 +306,7 @@ def _pv_entities() -> Iterable[EntityFactory]:
     yield _pv_current(
         key="pv3_current",
         addresses=[
-            ModbusAddressesSpec(holding=[39075], models=Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39075], models=Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART | Inv.AV_PRO),
         ],
         name="PV3 Current",
         scale=0.01,
@@ -315,6 +318,7 @@ def _pv_entities() -> Iterable[EntityFactory]:
             ModbusAddressesSpec(holding=[31041], models=Inv.KH_PRE133),
             ModbusAddressesSpec(holding=[39284, 39283], models=Inv.KH_133),
             ModbusAddressesSpec(holding=[39284, 39283], models=Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39283], models=Inv.AV_PRO),
         ],
         name="PV3 Power",
     )
@@ -334,7 +338,7 @@ def _pv_entities() -> Iterable[EntityFactory]:
         addresses=[
             ModbusAddressesSpec(input=[11099], models=Inv.KH_PRE119),
             ModbusAddressesSpec(holding=[31042], models=Inv.KH_PRE133),
-            ModbusAddressesSpec(holding=[39076], models=Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39076], models=Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART | Inv.AV_PRO),
         ],
         name="PV4 Voltage",
     )
@@ -350,7 +354,7 @@ def _pv_entities() -> Iterable[EntityFactory]:
     yield _pv_current(
         key="pv4_current",
         addresses=[
-            ModbusAddressesSpec(holding=[39077], models=Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39077], models=Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART | Inv.AV_PRO),
         ],
         name="PV4 Current",
         scale=0.01,
@@ -361,6 +365,7 @@ def _pv_entities() -> Iterable[EntityFactory]:
             ModbusAddressesSpec(input=[11101], models=Inv.KH_PRE119),
             ModbusAddressesSpec(holding=[31044], models=Inv.KH_PRE133),
             ModbusAddressesSpec(holding=[39286, 39285], models=Inv.KH_133 | Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39285], models=Inv.AV_PRO),
         ],
         name="PV4 Power",
     )
@@ -769,6 +774,142 @@ def _h1_current_voltage_power_entities() -> Iterable[EntityFactory]:
         scale=-0.001,
     )
 
+def _av_pro_current_voltage_power_entities() -> Iterable[EntityFactory]:
+    yield ModbusSensorDescription(
+        key="load_power",
+        addresses=[
+            ModbusAddressesSpec(input=[39225], models=Inv.AV_PRO),
+        ],
+        name="Load Power",
+        device_class=SensorDeviceClass.POWER,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement="kW",
+        icon="mdi:home-lightning-bolt-outline",
+        scale=0.001,
+        round_to=0.01,
+        validate=[Range(-100, 100)],
+    )
+
+    yield ModbusSensorDescription(
+        key="rpower",
+        addresses=[
+            ModbusAddressesSpec(input=[39134 ], models=Inv.AV_PRO),
+        ],
+        name="Inverter Power",
+        device_class=SensorDeviceClass.POWER,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement="kW",
+        icon="mdi:export",
+        scale=0.001,
+        round_to=0.01,
+        # Negative = charging batteries
+        validate=[Range(-100, 100)],
+    )
+
+    yield ModbusSensorDescription(
+        key="eps_rpower",
+        addresses=[
+            ModbusAddressesSpec(input=[39216], models=Inv.H1_G1 | Inv.KH_PRE119),
+        ],
+        entity_registry_enabled_default=False,
+        name="EPS Power",
+        device_class=SensorDeviceClass.POWER,
+        state_class=SensorStateClass.MEASUREMENT,
+        native_unit_of_measurement="kW",
+        icon="mdi:power-socket",
+        scale=0.001,
+        round_to=0.01,
+        post_process=lambda x: max(x, 0),
+        validate=[Range(0, 100)],
+    )
+
+    # The KH uses the opposite sign for Grid CT, for some bizarre reason
+
+    def _grid_ct(addresses: list[ModbusAddressesSpec], scale: float) -> Iterable[ModbusSensorDescription]:
+        yield ModbusSensorDescription(
+            key="grid_ct",
+            addresses=addresses,
+            name="Grid CT",
+            device_class=SensorDeviceClass.POWER,
+            state_class=SensorStateClass.MEASUREMENT,
+            native_unit_of_measurement="kW",
+            icon="mdi:meter-electric-outline",
+            scale=scale,
+            round_to=0.01,
+            validate=[Range(-100, 100)],
+        )
+        yield ModbusSensorDescription(
+            key="feed_in",
+            addresses=addresses,
+            name="Feed-in",
+            device_class=SensorDeviceClass.POWER,
+            state_class=SensorStateClass.MEASUREMENT,
+            native_unit_of_measurement="kW",
+            icon="mdi:transmission-tower-import",
+            scale=scale,
+            round_to=0.01,
+            post_process=lambda v: v if v > 0 else 0,
+            validate=[Range(0, 100)],
+        )
+        yield ModbusSensorDescription(
+            key="grid_consumption",
+            addresses=addresses,
+            name="Grid Consumption",
+            device_class=SensorDeviceClass.POWER,
+            state_class=SensorStateClass.MEASUREMENT,
+            native_unit_of_measurement="kW",
+            icon="mdi:transmission-tower-export",
+            scale=scale,
+            round_to=0.01,
+            post_process=lambda v: abs(v) if v < 0 else 0,
+            validate=[Range(0, 100)],
+        )
+
+    yield from _grid_ct(
+        addresses=[
+            ModbusAddressesSpec(input=[11021], models=Inv.H1_G1),
+            ModbusAddressesSpec(holding=[31014], models=Inv.H1_G1 | Inv.H1_LAN | Inv.H1_G2_SET),
+            ModbusAddressesSpec(holding=[39169, 39168], models=Inv.KH_133),
+        ],
+        scale=0.001,
+    )
+    yield from _grid_ct(
+        addresses=[
+            ModbusAddressesSpec(input=[11021], models=Inv.KH_PRE119),
+            ModbusAddressesSpec(holding=[31050, 31049], models=Inv.KH_PRE133),
+        ],
+        scale=-0.001,
+    )
+
+    def _ct2_meter(addresses: list[ModbusAddressesSpec], scale: float) -> ModbusSensorDescription:
+        return ModbusSensorDescription(
+            key="ct2_meter",
+            addresses=addresses,
+            name="CT2 Meter",
+            device_class=SensorDeviceClass.POWER,
+            state_class=SensorStateClass.MEASUREMENT,
+            native_unit_of_measurement="kW",
+            icon="mdi:meter-electric-outline",
+            scale=scale,
+            round_to=0.01,
+            validate=[Range(-100, 100)],
+        )
+
+    yield _ct2_meter(
+        addresses=[
+            ModbusAddressesSpec(input=[11022], models=Inv.H1_G1),
+            ModbusAddressesSpec(holding=[31015], models=Inv.H1_G1 | Inv.H1_LAN | Inv.H1_G2_SET),
+        ],
+        scale=0.001,
+    )
+    yield _ct2_meter(
+        addresses=[
+            ModbusAddressesSpec(input=[11022], models=Inv.KH_PRE119),
+            ModbusAddressesSpec(holding=[31052, 31051], models=Inv.KH_PRE133),
+            ModbusAddressesSpec(holding=[31015], models=Inv.KH_133),
+        ],
+        scale=-0.001,
+    )
 
 def _h3_current_voltage_power_entities() -> Iterable[EntityFactory]:
     def _grid_voltage(phase: str, addresses: list[ModbusAddressesSpec]) -> EntityFactory:
@@ -2714,6 +2855,7 @@ ENTITIES: list[EntityFactory] = sorted(
         _pv_entities(),
         _h1_current_voltage_power_entities(),
         _h3_current_voltage_power_entities(),
+        _av_pro_current_voltage_power_entities(),
         _inverter_entities(),
         _bms_entities(),
         _configuration_entities(),
