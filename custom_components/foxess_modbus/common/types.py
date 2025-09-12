@@ -59,7 +59,7 @@ class InverterModel(StrEnum):
     H3_PRO = "H3_PRO"
     H3_SMART = "H3_SMART"
 
-    AV_PRO = "AVOCADO_PRO"
+    AV_PRO = "MQ2200-M-H"
 
 
 class Inv(Flag):
