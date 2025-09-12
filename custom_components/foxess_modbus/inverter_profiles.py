@@ -104,6 +104,9 @@ H1_G2_REGISTERS = SpecialRegisterConfig(
     individual_read_register_ranges=[(41000, 41999)],
 )
 
+AVOCADO_PRO_REGISTERS = SpecialRegisterConfig(
+    individual_read_register_ranges=[(30000, 39999)],
+)
 
 @dataclass(kw_only=True)
 class CapacityParser:
