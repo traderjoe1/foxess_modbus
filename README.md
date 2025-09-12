@@ -1,7 +1,6 @@
-# FoxESS - Modbus
+# Avocado Pro FoxESS - Modbus
 
 [![GitHub Release][releases-shield]][releases]
-[![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 [![Community Forum][forum-shield]][forum]
 
 \*\* **This project is not endorsed by, directly affiliated with, maintained, authorized, or sponsored by FoxESS** \*\*
@@ -67,7 +66,7 @@ Recommended installation is through [HACS][hacs]:
 
 If your inverter supports setting charge periods, you can use install the [Charge Periods lovelace card](https://github.com/nathanmarlor/foxess_modbus_charge_period_card):
 
-![Charge Periods](images/charge-periods.png)
+
 
 ## Services
 
@@ -94,7 +93,7 @@ Sets all charge periods in one service call. The service "Update Charge Period" 
 [buymecoffee]: https://www.buymeacoffee.com/nathanmarlor
 [buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
 [hacs]: https://hacs.xyz
-[my-hacs]: https://my.home-assistant.io/redirect/hacs_repository/?owner=nathanmarlor&repository=foxess_modbus&category=integration
+[my-hacs]: https://my.home-assistant.io/redirect/hacs_repository/?owner=traderjoe1&repository=foxess_modbus&category=integration
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge
 [forum]: https://community.home-assistant.io/
 [releases-shield]: https://img.shields.io/github/release/nathanmarlor/foxess_modbus.svg?style=for-the-badge
