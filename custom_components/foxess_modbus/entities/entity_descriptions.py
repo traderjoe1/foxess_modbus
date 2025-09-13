@@ -2659,7 +2659,7 @@ def _configuration_entities() -> Iterable[EntityFactory]:
 
     # Sensors are a bit nicer to look at: keep for consistency with other numbers
     yield ModbusSensorDescription(
-        key="max_charge_current",s
+        key="max_charge_current",
         addresses=[
             ModbusAddressesSpec(input=[41007], models=Inv.H1_G1 | Inv.KH_PRE119),
             ModbusAddressesSpec(
