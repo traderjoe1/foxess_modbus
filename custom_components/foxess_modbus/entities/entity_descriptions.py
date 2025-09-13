@@ -1488,6 +1488,7 @@ def _inverter_entities() -> Iterable[EntityFactory]:
     )
     yield _invbatvolt(index=1, addresses=[ModbusAddressesSpec(holding=[39227], models=Inv.H3_PRO_SET | Inv.H3_SMART | Inv.AV_PRO)])
     yield _invbatvolt(index=2, addresses=[ModbusAddressesSpec(holding=[39232], models=Inv.H3_PRO_SET | Inv.H3_SMART)])
+    yield _invbatvolt(index=2, addresses=[ModbusAddressesSpec(holding=[39228], models=Inv.AV_PRO)])
 
     def _invbatcurrent(index: int | None, scale: float, addresses: list[ModbusAddressesSpec]) -> EntityFactory:
         key_suffix = f"_{index}" if index is not None else ""
@@ -1517,7 +1518,7 @@ def _inverter_entities() -> Iterable[EntityFactory]:
     yield _invbatcurrent(
         index=1,
         scale=0.001,
-        addresses=[ModbusAddressesSpec(holding=[39229, 39228], models=Inv.H3_PRO_SET | Inv.H3_SMART)],
+        addresses=[ModbusAddressesSpec(holding=[39229, 39228], models=Inv.H3_PRO_SET | Inv.H3_SMART | Inv.AV_PRO)],
     )
     yield _invbatcurrent(
         index=2,
@@ -1580,7 +1581,7 @@ def _inverter_entities() -> Iterable[EntityFactory]:
     yield from _invbatpower(
         index=1,
         addresses=[
-            ModbusAddressesSpec(holding=[39231, 39230], models=Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressesSpec(holding=[39231, 39230], models=Inv.H3_PRO_SET | Inv.H3_SMART | Inv.AV_PRO),
         ],
     )
     yield from _invbatpower(
@@ -1605,7 +1606,7 @@ def _inverter_entities() -> Iterable[EntityFactory]:
             ),
             ModbusAddressesSpec(holding=[31015], models=Inv.H3_SET),
             ModbusAddressesSpec(holding=[38847, 38846], models=Inv.H3_PRO_PRE122),
-            ModbusAddressesSpec(holding=[39139], models=Inv.H3_PRO_122),
+            ModbusAddressesSpec(holding=[39139], models=Inv.H3_PRO_122 | Inv.AV_PRO),
         ],
         entity_registry_enabled_default=False,
         name="Grid Frequency",
@@ -1625,6 +1626,7 @@ def _inverter_entities() -> Iterable[EntityFactory]:
                 holding=[31013], models=Inv.H1_G1 | Inv.H1_LAN | Inv.H1_G2_SET | Inv.KH_PRE133 | Inv.KH_133
             ),
             ModbusAddressesSpec(holding=[31025], models=Inv.H3_SET),
+            ModbusAddressesSpec(holding=[39218], models=Inv.AV_PRO),
         ],
         entity_registry_enabled_default=False,
         name="EPS Frequency",
@@ -1828,7 +1830,7 @@ def _inverter_entities() -> Iterable[EntityFactory]:
     )
     yield _solar_energy_total(
         addresses=[
-            ModbusAddressesSpec(holding=[39602, 39601], models=Inv.H3_SMART | Inv.H3_PRO_SET & ~Inv.H3_PRO_PRE122),
+            ModbusAddressesSpec(holding=[39602, 39601], models=Inv.H3_SMART | Inv.H3_PRO_SET & ~Inv.H3_PRO_PRE122 | Inv.AV_PRO),
         ],
         scale=0.01,
     )
@@ -1874,7 +1876,7 @@ def _inverter_entities() -> Iterable[EntityFactory]:
     )
     yield _solar_energy_today(
         addresses=[
-            ModbusAddressesSpec(holding=[39604, 39603], models=Inv.H3_SMART | Inv.H3_PRO_SET & ~Inv.H3_PRO_PRE122),
+            ModbusAddressesSpec(holding=[39604, 39603], models=Inv.H3_SMART | Inv.H3_PRO_SET & ~Inv.H3_PRO_PRE122 | Inv.AV_PRO),
         ],
         scale=0.01,
     )
