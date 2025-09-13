@@ -452,7 +452,7 @@ _INVERTER_PROFILES_LIST = [
     ),
 
     # Avocado Pro
-    InverterModelProfile(InverterModel.AV_PRO, r"^MQ2200-M-H.*").add_connection_type(
+    InverterModelProfile(InverterModel.AV_PRO, r"MQ(\d+)-M-H").add_connection_type(
         ConnectionType.AUX,
         RegisterType.HOLDING,
         versions={None: Inv.AV_PRO},

@@ -1486,7 +1486,7 @@ def _inverter_entities() -> Iterable[EntityFactory]:
             ),
         ],
     )
-    yield _invbatvolt(index=1, addresses=[ModbusAddressesSpec(holding=[39227], models=Inv.H3_PRO_SET | Inv.H3_SMART)])
+    yield _invbatvolt(index=1, addresses=[ModbusAddressesSpec(holding=[39227], models=Inv.H3_PRO_SET | Inv.H3_SMART | Inv.AV_PRO)])
     yield _invbatvolt(index=2, addresses=[ModbusAddressesSpec(holding=[39232], models=Inv.H3_PRO_SET | Inv.H3_SMART)])
 
     def _invbatcurrent(index: int | None, scale: float, addresses: list[ModbusAddressesSpec]) -> EntityFactory:
@@ -2534,11 +2534,13 @@ def _bms_entities() -> Iterable[EntityFactory]:
             ModbusAddressesSpec(input=[11034], models=Inv.H1_G1 | Inv.KH_PRE119),
             ModbusAddressesSpec(holding=[37609], models=Inv.H1_G2_144),
             ModbusAddressesSpec(holding=[31034], models=Inv.H3_SET),
+            ModbusAddressesSpec(holding=[39227], models=Inv.AV_PRO),
         ],
         bat_current=[
             ModbusAddressesSpec(input=[11035], models=Inv.H1_G1 | Inv.KH_PRE119),
             ModbusAddressesSpec(holding=[37610], models=Inv.H1_G2_144),
             ModbusAddressesSpec(holding=[31035], models=Inv.H3_SET),
+            ModbusAddressesSpec(holding=[39237], models=Inv.AV_PRO),
         ],
         battery_soc=[
             ModbusAddressesSpec(input=[11036], models=Inv.H1_G1 | Inv.KH_PRE119),
@@ -2546,6 +2548,7 @@ def _bms_entities() -> Iterable[EntityFactory]:
                 holding=[31024], models=Inv.H1_G1 | Inv.H1_LAN | Inv.H1_G2_SET | Inv.KH_PRE133 | Inv.KH_133
             ),
             ModbusAddressesSpec(holding=[31038], models=Inv.H3_SET),
+            ModbusAddressesSpec(holding=[39423], models=Inv.AV_PRO),
         ],
         battery_soh=[
             # Temporarily removed, see #756
@@ -2634,7 +2637,7 @@ def _configuration_entities() -> Iterable[EntityFactory]:
     yield ModbusWorkModeSelectDescription(
         key="work_mode",
         address=[
-            ModbusAddressSpec(holding=49203, models=Inv.H3_PRO_SET | Inv.H3_SMART),
+            ModbusAddressSpec(holding=49203, models=Inv.H3_PRO_SET | Inv.H3_SMART | Inv.AV_PRO),
         ],
         name="Work Mode",
         options_map={
@@ -2656,7 +2659,7 @@ def _configuration_entities() -> Iterable[EntityFactory]:
 
     # Sensors are a bit nicer to look at: keep for consistency with other numbers
     yield ModbusSensorDescription(
-        key="max_charge_current",
+        key="max_charge_current",s
         addresses=[
             ModbusAddressesSpec(input=[41007], models=Inv.H1_G1 | Inv.KH_PRE119),
             ModbusAddressesSpec(
